@@ -57,11 +57,11 @@ def create_preprocessfile(df, df_preprocess):
 
 
 if __name__ == '__main__':
-    stock_path = os.path.join(synthetic_data_path, 'stock_synthetic_dist_sin.csv')
+    stock_path = os.path.join(synthetic_data_path, 'stock_synthetic_9years_dist_sin.csv')
     df = pd.read_csv(stock_path)
     columns = ["c_open", "c_high", "c_low", "n_close", "5day", "10day", "15day", "20day", "25day", "30day",
                "gm_week", "gm_2_weeks", "gm_3_weeks", "gm_4_weeks", "gm_5_weeks", "gm_6_weeks", "pr_week",
                "pr_2_weeks", "pr_3_weeks", "pr_4_weeks", "pr_5_weeks", "pr_6_weeks"]
     df_preprocess = pd.DataFrame(columns=columns)
     create_preprocessfile(df=df, df_preprocess=df_preprocess)
-    df_preprocess.to_csv(os.path.join(save_data_path, 'stock_synthetic_dist_sin.csv'), header=None, index=False)
+    df_preprocess.to_csv(os.path.join(save_data_path, 'stock_synthetic_9years_dist_sin.csv'), header=None, index=False)

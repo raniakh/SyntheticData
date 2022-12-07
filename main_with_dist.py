@@ -16,7 +16,7 @@ save_data_path = 'synthetic_data'
 
 def handle_df(prices):
     todays_date = datetime.datetime.now().date()
-    index = pd.date_range(end=todays_date, periods=1096, freq='D')
+    index = pd.date_range(end=todays_date, periods=3287, freq='D')
     columns = ["Open", "High", "Low", "Close", "gm_week", "gm_2_weeks", "gm_3_weeks", "gm_4_weeks", "gm_5_weeks",
                "gm_6_weeks", "pr_week", "pr_2_weeks", "pr_3_weeks", "pr_4_weeks", "pr_5_weeks", "pr_6_weeks"]
     df = pd.DataFrame(index=index, columns=columns)
@@ -131,15 +131,21 @@ if __name__ == '__main__':
     df = handle_df(prices)
     plt.plot(df.loc[:, 'Close'])
     plt.title(
-        'Close prices generated from behavioral features Beta: {},{}, sum [dist * sin(feature)]'.format(beta1, beta2))
+        'Close prices generated from behavioral features \nBeta: {},{}, sum[dist * sin(feature)]'.format(beta1, beta2),
+        loc='center')
+    plt.xlabel('years')
+    plt.ylabel('price')
+    # plt.figure(figsize=(30,30))
     plt.show()
     prices_new = df.loc[:, 'Close']
     prices_new = prices_new[60:]
     plt.plot(prices_new)
-    plt.title('no 60 first days')
+    plt.title('without 60 first days')
+    plt.xlabel('years')
+    plt.ylabel('price')
     plt.show()
-    prices_new_new = prices_new[60:90]
-    plt.plot(prices_new_new)
-    plt.title('60:90')
-    plt.show()
-    df.to_csv(os.path.join(save_data_path, '{}.csv'.format('stock_synthetic_dist_sin')), index=True)
+    # prices_new_new = prices_new[60:90]
+    # plt.plot(prices_new_new)
+    # plt.title('60:90')
+    # plt.show()
+    df.to_csv(os.path.join(save_data_path, '{}.csv'.format('stock_synthetic_9years_dist_sin')), index=True)
