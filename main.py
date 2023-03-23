@@ -30,25 +30,6 @@ def handle_df(prices):
 
 
 def add_close_high_low(prices, df, index):
-    # mu = beta1 * np.mean([df.loc[index, 'gm_week'], df.loc[index, 'gm_2_weeks'], df.loc[index, 'gm_3_weeks'],
-    #                       df.loc[index, 'gm_4_weeks'], df.loc[index, 'gm_5_weeks'], df.loc[index, 'gm_6_weeks']]) \
-    #      + beta2 * np.mean([df.loc[index, 'pr_week'], df.loc[index, 'pr_2_weeks'], df.loc[index, 'pr_3_weeks'],
-    #                         df.loc[index, 'pr_4_weeks'], df.loc[index, 'pr_5_weeks'], df.loc[index, 'pr_6_weeks']])
-
-    # mu = np.sin(beta1 * (df.loc[index, 'gm_week'] + df.loc[index, 'gm_2_weeks'] + df.loc[index, 'gm_3_weeks'] +
-    #                     df.loc[index, 'gm_4_weeks'] + df.loc[index, 'gm_5_weeks'] + df.loc[index, 'gm_6_weeks'] )
-    #             + beta2 * (
-    #                  df.loc[index, 'pr_week'] + df.loc[index, 'pr_2_weeks'] + df.loc[index, 'pr_3_weeks'] +
-    #                  df.loc[index, 'pr_4_weeks'] + df.loc[index, 'pr_5_weeks'] + df.loc[index, 'pr_6_weeks']))
-    # mu = np.sin(beta1 * (df.loc[index, 'gm_week'] + df.loc[index, 'gm_2_weeks'] + df.loc[index, 'gm_3_weeks'] +
-    #                      df.loc[index, 'gm_4_weeks'] + df.loc[index, 'gm_5_weeks'] + df.loc[index, 'gm_6_weeks'])
-    #             * beta2 * (
-    #                     df.loc[index, 'pr_week'] + df.loc[index, 'pr_2_weeks'] + df.loc[index, 'pr_3_weeks'] +
-    #                     df.loc[index, 'pr_4_weeks'] + df.loc[index, 'pr_5_weeks'] + df.loc[index, 'pr_6_weeks']))
-    # mu = beta1 * np.cos(df.loc[index, 'gm_week'] + df.loc[index, 'gm_2_weeks'] + df.loc[index, 'gm_3_weeks'] +
-    #                      df.loc[index, 'gm_4_weeks'] + df.loc[index, 'gm_5_weeks'] + df.loc[index, 'gm_6_weeks']) \
-    #      + beta2 * np.sin(df.loc[index, 'pr_week'] + df.loc[index, 'pr_2_weeks'] + df.loc[index, 'pr_3_weeks'] +
-    #                     df.loc[index, 'pr_4_weeks'] + df.loc[index, 'pr_5_weeks'] + df.loc[index, 'pr_6_weeks'])
 
     mu = beta1 * np.sin(df.loc[index, 'gm_week'] + df.loc[index, 'gm_2_weeks'] + df.loc[index, 'gm_3_weeks'] +
                         df.loc[index, 'gm_4_weeks'] + df.loc[index, 'gm_5_weeks'] + df.loc[index, 'gm_6_weeks']) \
@@ -126,4 +107,4 @@ if __name__ == '__main__':
     plt.plot(df.loc[:, 'Close'])
     plt.title('Close prices generated from behavioral features {}sin(gm) + {}sin(pr)'.format(beta1, beta2))
     plt.show()
-    df.to_csv(os.path.join(save_data_path, '{}.csv'.format('stock')), index=True)
+    df.to_csv(os.path.join(save_data_path, '{}.csv'.format('synthetic_data_2')), index=True)

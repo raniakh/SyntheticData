@@ -38,12 +38,6 @@ def add_close_high_low(prices, df, index):
     #                       dist[2]*df.loc[index, 'pr_3_weeks'] + dist[3]*df.loc[index, 'pr_4_weeks'] +
     #                       dist[4]*df.loc[index, 'pr_5_weeks'] + dist[5]*df.loc[index, 'pr_6_weeks'])
 
-    # mu = beta1 * (dist[0] * np.sin(df.loc[index, 'gm_week']) + dist[1] * np.sin(df.loc[index, 'gm_2_weeks'])
-    #               + dist[2] * np.sin(df.loc[index, 'gm_3_weeks']) + dist[3] * np.sin(df.loc[index, 'gm_4_weeks'])
-    #               + dist[4] * np.sin(df.loc[index, 'gm_5_weeks']) + dist[5] * np.sin(df.loc[index, 'gm_6_weeks'])) \
-    #      + beta2 * (dist[0] * np.sin(df.loc[index, 'pr_week']) + dist[1] * np.sin(df.loc[index, 'pr_2_weeks'])
-    #                 + dist[2] * np.sin(df.loc[index, 'pr_3_weeks']) + dist[3] * np.sin(df.loc[index, 'pr_4_weeks'])
-    #                 + dist[4] * np.sin(df.loc[index, 'pr_5_weeks']) + dist[5] * np.sin(df.loc[index, 'pr_6_weeks']))
     func = lambda f, c1, c2: 2 * math.pi * c1 * f + c2
     mu = beta1 * (dist[0] * np.sin(func(df.loc[index, 'gm_week'], 100, 0)) +
                   dist[1] * np.sin(func(df.loc[index, 'gm_2_weeks'], 200, 2)) +
@@ -131,11 +125,10 @@ if __name__ == '__main__':
     df = handle_df(prices)
     plt.plot(df.loc[:, 'Close'])
     plt.title(
-        'Close prices generated from behavioral features \nBeta: {},{}, sum[dist * sin(feature)]'.format(beta1, beta2),
+        'Close prices generated from behavioral features \nbeta1= {} beta2= {}'.format(beta1, beta2),
         loc='center')
     plt.xlabel('years')
     plt.ylabel('price')
-    # plt.figure(figsize=(30,30))
     plt.show()
     prices_new = df.loc[:, 'Close']
     prices_new = prices_new[60:]
@@ -144,8 +137,4 @@ if __name__ == '__main__':
     plt.xlabel('years')
     plt.ylabel('price')
     plt.show()
-    # prices_new_new = prices_new[60:90]
-    # plt.plot(prices_new_new)
-    # plt.title('60:90')
-    # plt.show()
-    df.to_csv(os.path.join(save_data_path, '{}.csv'.format('stock_synthetic_9years_dist_sin')), index=True)
+    df.to_csv(os.path.join(save_data_path, '{}.csv'.format('stock_synthetic_data_1_raw')), index=True)
